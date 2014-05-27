@@ -19,9 +19,13 @@ public class Game {
 		shore.addConnectedPlace(sherwoodForest);
 		sherwoodForest.addPossibleAction("chasser");
 		
+		Place muytakTower = new Place("tour de Muytak", "");
+		
 		Player player = new Player(10, 10, shore);
 		shore.showInfo();
 		goToPlace(player, sherwoodForest);
+		goToPlace(player, muytakTower);
+		
 //		MosquitoHandler mosquitoHandler = new MosquitoHandler(10);
 //		MosquitoHandler mosquitoHandler2 = new MosquitoHandler(10);
 //		player.addEquipement(mosquitoHandler);
