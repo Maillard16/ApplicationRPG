@@ -3,14 +3,14 @@ public class MosquitoHandler extends Handler {
     
     private int sprayLoad;
 
-    public MosquitoHandler() {
+    public MosquitoHandler(int sprayLoad) {
         super(new Class[]{MosquitoSwarm.class});
-        sprayLoad = 10;
+        this.sprayLoad = sprayLoad;
     }
     
-    public MosquitoHandler(Handler successor) {
+    public MosquitoHandler(int sprayLoad, Handler successor) {
         super(successor, new Class[]{MosquitoSwarm.class});
-        sprayLoad = 10;
+        this.sprayLoad = sprayLoad;
     }
 
     public void handleRequest(Threat threat) {
@@ -18,13 +18,17 @@ public class MosquitoHandler extends Handler {
         if(canHandle(threat)) {
             System.out.println("Le spray anti-moustique marche.");
             
-            int tmpSprayLoad = sprayLoad;
-            sprayLoad -= ((MosquitoSwarm)threat).getMosquitoNbr();
-            ((MosquitoSwarm)threat).setMosquitoNbr(((MosquitoSwarm)threat).getMosquitoNbr() - tmpSprayLoad);
+            int killedMosqutoNbr = Math.min(sprayLoad, ((MosquitoSwarm)threat).getMosquitoNbr());
+            sprayLoad -= killedMosqutoNbr;
+            ((MosquitoSwarm)threat).setMosquitoNbr(((MosquitoSwarm)threat).getMosquitoNbr() - killedMosqutoNbr);
             
-            System.out.println("Vous tuez " + tmpSprayLoad + " moustiques.");
+//            int tmpSprayLoad = sprayLoad;
+//            sprayLoad -= ((MosquitoSwarm)threat).getMosquitoNbr();
+//            ((MosquitoSwarm)threat).setMosquitoNbr(((MosquitoSwarm)threat).getMosquitoNbr() - tmpSprayLoad);
             
-            if(((MosquitoSwarm)threat).getMosquitoNbr() >= 0) {
+            System.out.println("Vous tuez " + killedMosqutoNbr + " moustiques.");
+            
+            if(((MosquitoSwarm)threat).getMosquitoNbr() > 0) {
                 System.out.println("Il reste des moustiques.");
             } else {
                 System.out.println("Plus de moustiques.");

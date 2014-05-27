@@ -32,5 +32,10 @@ public class Player {
 		if(equipement != null) {
 			equipement.handleRequest(threat);
 		}
+		
+		if(threat.isThreatening()) {
+            System.out.println("A cours d'objet");
+            threat.dealDamage(this);
+		}
 	}
 }

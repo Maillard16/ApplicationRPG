@@ -25,9 +25,6 @@ public abstract class Handler {
     	if(threat.isThreatening()) {
 	    	if(successor != null) {
 	            successor.handleRequest(threat);
-	        } else {
-	            System.out.println("A cours d'objet");
-	            threat.dealDamage();
 	        }
     	}
     }

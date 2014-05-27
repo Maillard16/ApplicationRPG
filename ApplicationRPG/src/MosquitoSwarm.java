@@ -12,14 +12,14 @@ public class MosquitoSwarm extends Threat {
     
     public void setMosquitoNbr(int mosquitoNbr) {
         this.mosquitoNbr = mosquitoNbr;
-        if(mosquitoNbr == 0) {
+        if(mosquitoNbr <= 0) {
             setIsThreatning(false);
         }
     }
 
 	@Override
-	public void dealDamage() {
-		getThreathenedPlayer().loseLife(mosquitoNbr);
+	public void dealDamage(Player player) {
+		player.loseLife(mosquitoNbr);
 	}
 	
 	public void attackMessage() {
