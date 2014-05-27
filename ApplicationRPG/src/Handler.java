@@ -3,14 +3,6 @@ public abstract class Handler {
     private Handler successor;
     private Class[] handableThreat;
     private boolean isDestroyed = false;
-    
-    public boolean isDestroyed() {
-		return isDestroyed;
-	}
-
-	public void setDestroyed(boolean isDestroyed) {
-		this.isDestroyed = isDestroyed;
-	}
 
 	public Handler(Class[] handableThreat) {
         this.handableThreat = handableThreat;
@@ -45,5 +37,13 @@ public abstract class Handler {
 
 	public void setSuccessor(Handler handler) {
 		successor = handler;		
+	}
+	
+    public boolean isDestroyed() {
+		return isDestroyed;
+	}
+
+	public void setDestroyed(boolean isDestroyed) {
+		this.isDestroyed = isDestroyed;
 	}
 }

@@ -9,13 +9,13 @@ public abstract class Threat {
     public boolean isThreatening() {
         return isThreatening;
     }
-
-	public abstract void dealDamage(Player player);
 	
 	public void attack(Player player) {
 		attackMessage();
 		player.undergoThreat(this);
 	}
+	
+	public abstract void dealDamage(Player player);
 	
 	public abstract void attackMessage();
 }

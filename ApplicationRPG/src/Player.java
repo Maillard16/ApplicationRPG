@@ -24,7 +24,7 @@ public class Player {
 	public void loseLife(int lives) {
 		this.lives -= lives;
 		System.out.println("Vous perdez " + lives + " vies.");
-		if(lives <= 0)
+		if(this.lives <= 0)
 			System.out.println("vous êtes mort");
 	}
 
