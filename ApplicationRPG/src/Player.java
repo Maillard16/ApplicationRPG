@@ -24,4 +24,10 @@ public class Player {
 		if(lives <= 0)
 			System.out.println("vous êtes mort");
 	}
+
+	public void handleRequest(Threat threat) {
+		if(equipement.getFirst()) {
+			
+		}
+	}
 }

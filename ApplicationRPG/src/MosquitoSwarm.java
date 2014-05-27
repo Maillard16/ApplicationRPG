@@ -21,4 +21,8 @@ public class MosquitoSwarm extends Threat {
 	public void dealDamage() {
 		getThreathenedPlayer().loseLife(mosquitoNbr);
 	}
+
+	public void attack(Player player) {
+		player.handleRequest(this);
+	}
 }

@@ -3,6 +3,11 @@ public class MosquitoHandler extends Handler {
     
     private int sprayLoad;
 
+    public MosquitoHandler() {
+        super(new Class[]{MosquitoSwarm.class});
+        sprayLoad = 10;
+    }
+    
     public MosquitoHandler(Handler successor) {
         super(successor, new Class[]{MosquitoSwarm.class});
         sprayLoad = 10;

@@ -12,6 +12,10 @@ public abstract class Handler {
 		this.isDestroyed = isDestroyed;
 	}
 
+	public Handler(Class[] handableThreat) {
+        this.handableThreat = handableThreat;
+    }
+	
 	public Handler(Handler successor, Class[] handableThreat) {
         this.successor = successor;
         this.handableThreat = handableThreat;
