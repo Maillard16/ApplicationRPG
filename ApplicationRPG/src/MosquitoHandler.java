@@ -22,6 +22,8 @@ public class MosquitoHandler extends Handler {
             sprayLoad -= ((MosquitoSwarm)threat).getMosquitoNbr();
             ((MosquitoSwarm)threat).setMosquitoNbr(((MosquitoSwarm)threat).getMosquitoNbr() - tmpSprayLoad);
             
+            System.out.println("Vous tuez " + tmpSprayLoad + " moustiques.");
+            
             if(((MosquitoSwarm)threat).getMosquitoNbr() >= 0) {
                 System.out.println("Il reste des moustiques.");
             } else {

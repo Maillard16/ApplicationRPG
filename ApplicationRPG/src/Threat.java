@@ -22,7 +22,10 @@ public abstract class Threat {
 	public abstract void dealDamage();
 	
 	public void attack(Player player) {
+		attackMessage();
 		threathenedPlayer = player;
 		player.handleRequest(this);
 	}
+	
+	public abstract void attackMessage();
 }

@@ -21,4 +21,8 @@ public class MosquitoSwarm extends Threat {
 	public void dealDamage() {
 		getThreathenedPlayer().loseLife(mosquitoNbr);
 	}
+	
+	public void attackMessage() {
+		System.out.println("Vous êtes attaqué par un essaim de moustique.");
+	}
 }
