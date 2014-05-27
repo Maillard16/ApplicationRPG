@@ -1,5 +1,6 @@
 package game;
 import gameContent.Handler;
+import gameContent.Place;
 import gameContent.Threat;
 
 import java.util.LinkedList;
@@ -11,9 +12,12 @@ public class Player {
 	
 	private Handler equipement;
 	
-	public Player(int lives, int money) {
+	private Place currentPlace;
+	
+	public Player(int lives, int money, Place place) {
 		this.lives = lives;
 		this.money = money;
+		this.currentPlace = place;
 	}
 	
 	public void addEquipement(Handler item) {
@@ -41,5 +45,13 @@ public class Player {
             System.out.println("A cours d'objet");
             threat.dealDamage(this);
 		}
+	}
+
+	public Place getCurrentPlace() {
+		return currentPlace;
+	}
+
+	public void setCurrentPlace(Place currentPlace) {
+		this.currentPlace = currentPlace;
 	}
 }
