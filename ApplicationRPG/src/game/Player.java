@@ -5,6 +5,8 @@ import gameContent.Threat;
 
 import java.util.LinkedList;
 
+import ui.UserInterface;
+
 
 public class Player {
 	private int lives;
@@ -31,9 +33,9 @@ public class Player {
 
 	public void loseLife(int lives) {
 		this.lives -= lives;
-		System.out.println("Vous perdez " + lives + " vies.");
+		UserInterface.getInstance().println("Vous perdez " + lives + " vies.");
 		if(this.lives <= 0)
-			System.out.println("vous êtes mort");
+			UserInterface.getInstance().println("vous êtes mort");
 	}
 
 	public void undergoThreat(Threat threat) {
@@ -42,7 +44,7 @@ public class Player {
 		}
 		
 		if(threat.isThreatening()) {
-            System.out.println("A cours d'objet");
+			UserInterface.getInstance().println("A cours d'objet");
             threat.dealDamage(this);
 		}
 	}
