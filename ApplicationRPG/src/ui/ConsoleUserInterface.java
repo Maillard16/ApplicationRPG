@@ -5,51 +5,21 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 
 
-public class ConsoleUserInterface implements UserInterface {
+public class ConsoleUserInterface extends UserInterface {
     
     private BufferedReader in;
     private PrintStream out;
     
-    private ConsoleUserInterface() {
+    protected ConsoleUserInterface() {
         in = new BufferedReader(new InputStreamReader(System.in));
         out = System.out;
     }
     
-    private static class Instance { 
-        private static final ConsoleUserInterface instance = new ConsoleUserInterface();
-    }
-    
-    public static UserInterface getInstance() {
-        return Instance.instance;
-    }
-    
     @Override
-    public void print(String message) {
+    public void printLn(String message) {
         out.println(message);
         out.flush();
     }
-    
-//    @Override
-//    public void clear()
-//    {
-//        try
-//        {
-//            final String os = System.getProperty("os.name");
-//
-//            if (os.contains("Windows"))
-//            {
-//                Runtime.getRuntime().exec("cls");
-//            }
-//            else
-//            {
-//                Runtime.getRuntime().exec("clear");
-//            }
-//        }
-//        catch (final Exception e)
-//        {
-//            //  Handle any exceptions.
-//        }
-//    }
     
     @Override
     public String getLine() {
@@ -60,5 +30,6 @@ public class ConsoleUserInterface implements UserInterface {
             e.printStackTrace();
         }
         return message;
-    }    
+    }
+    
 }
