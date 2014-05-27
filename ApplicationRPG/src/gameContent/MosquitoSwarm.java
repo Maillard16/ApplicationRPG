@@ -1,3 +1,6 @@
+package gameContent;
+import game.Player;
+
 
 public class MosquitoSwarm extends Threat {
     private int mosquitoNbr;

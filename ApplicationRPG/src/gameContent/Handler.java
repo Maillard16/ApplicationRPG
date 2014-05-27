@@ -1,3 +1,4 @@
+package gameContent;
 
 public abstract class Handler {
     private Handler successor;

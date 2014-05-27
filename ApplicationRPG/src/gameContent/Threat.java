@@ -1,3 +1,6 @@
+package gameContent;
+import game.Player;
+
 
 public abstract class Threat {
     private boolean isThreatening = true;

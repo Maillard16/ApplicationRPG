@@ -1,3 +1,7 @@
+package game;
+import gameContent.MosquitoHandler;
+import gameContent.MosquitoSwarm;
+
 
 public class Game {
 
