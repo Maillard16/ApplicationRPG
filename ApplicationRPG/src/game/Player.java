@@ -62,6 +62,7 @@ public class Player {
 		if(currentPlace.isConnectedTo(place)) {
 			currentPlace = place;
 			place.showInfo();
+			place.generateThreat(this);
 		} else {
 			ConsoleUserInterface.getInstance().println("impossible");
 		}
