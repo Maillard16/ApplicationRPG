@@ -2,7 +2,7 @@ package gameContent;
 
 import java.util.LinkedList;
 
-public class Place {
+public abstract class Place {
 	public String name;
 	public String firstVisitText;
 	public boolean visited;
@@ -42,4 +42,6 @@ public class Place {
 			System.out.println(action);
 		}
 	}
+
+	public abstract boolean gererCommande(String command);
 }
