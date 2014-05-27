@@ -5,6 +5,7 @@ import gameContent.Threat;
 
 import java.util.LinkedList;
 
+import ui.ConsoleUserInterface;
 import ui.UserInterface;
 
 
@@ -55,5 +56,14 @@ public class Player {
 
 	public void setCurrentPlace(Place currentPlace) {
 		this.currentPlace = currentPlace;
+	}
+	
+	public void goToPlace(Place place) {
+		if(currentPlace.isConnectedTo(place)) {
+			currentPlace = place;
+			place.showInfo();
+		} else {
+			ConsoleUserInterface.getInstance().println("impossible");
+		}
 	}
 }

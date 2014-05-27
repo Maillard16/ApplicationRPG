@@ -28,8 +28,8 @@ public class Game {
 		
 		Player player = new Player(10, 10, shore);
 		shore.showInfo();
-		goToPlace(player, sherwoodForest);
-		goToPlace(player, muytakTower);
+//		goToPlace(player, sherwoodForest);
+//		goToPlace(player, muytakTower);
 		
 //		MosquitoHandler mosquitoHandler = new MosquitoHandler(10);
 //		MosquitoHandler mosquitoHandler2 = new MosquitoHandler(10);
@@ -43,14 +43,31 @@ public class Game {
 //		mosquitoSwarm.attack(player);
 //		mosquitoSwarm2.attack(player);
 //		mosquitoSwarm3.attack(player);
+		
+		String command;
+		String[] commandChunks;
+		while(true) {
+			command = ui.getLine();
+			if(!command.equals("Console Input Error")) {
+				commandChunks = command.split(" ");
+				switch (commandChunks[0]) {
+				case "go" :
+					Place place = getPlaceByName(commandChunks[1]);
+					if(place == null) {
+						System.out.println("Destination inconnue.");
+					} else {
+						player.goToPlace(place);
+					}
+					break;
+	
+				default:
+					break;
+				}
+			}
+		}
 	}
 	
-	public static void goToPlace(Player player, Place place) {
-		if(player.getCurrentPlace().isConnectedTo(place)) {
-			player.setCurrentPlace(place);
-			place.showInfo();
-		} else {
-			ConsoleUserInterface.getInstance().println("impossible");
-		}
+	public Place getPlaceByName(String name) {
+		
 	}
 }
