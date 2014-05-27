@@ -16,7 +16,7 @@ public class ConsoleUserInterface extends UserInterface {
     }
     
     @Override
-    public void printLn(String message) {
+    public void println(String message) {
         out.println(message);
         out.flush();
     }
