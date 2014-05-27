@@ -46,7 +46,7 @@ public abstract class Handler {
     	return canHandle;
     }
 
-	public void setSuccessor(Handler item) {
-		successor = item;		
+	public void setSuccessor(Handler handler) {
+		successor = handler;		
 	}
 }

@@ -27,7 +27,7 @@ public class Player {
 			System.out.println("vous êtes mort");
 	}
 
-	public void handleRequest(Threat threat) {
+	public void undergoThreat(Threat threat) {
 		if(equipement.size() != 0) {
 			equipement.getFirst().handleRequest(threat);
 		}

@@ -1,6 +1,6 @@
 
 public abstract class Threat {
-    private boolean isThreatning = true;
+    private boolean isThreatening = true;
     private Player threathenedPlayer;
     
     public Player getThreathenedPlayer() {
@@ -12,11 +12,11 @@ public abstract class Threat {
 	}
 
 	public void setIsThreatning(boolean isThreating) {
-        this.isThreatning = isThreating;
+        this.isThreatening = isThreating;
     }
     
     public boolean isThreatening() {
-        return isThreatning;
+        return isThreatening;
     }
 
 	public abstract void dealDamage();
@@ -24,7 +24,7 @@ public abstract class Threat {
 	public void attack(Player player) {
 		attackMessage();
 		threathenedPlayer = player;
-		player.handleRequest(this);
+		player.undergoThreat(this);
 	}
 	
 	public abstract void attackMessage();
