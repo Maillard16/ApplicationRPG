@@ -20,4 +20,9 @@ public abstract class Threat {
     }
 
 	public abstract void dealDamage();
+	
+	public void attack(Player player) {
+		threathenedPlayer = player;
+		player.handleRequest(this);
+	}
 }

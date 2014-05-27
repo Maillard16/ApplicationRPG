@@ -38,7 +38,7 @@ public abstract class Handler {
     		canHandle = false;
     		for (Class threatClass : handableThreat) {
 				if(threatClass == threat.getClass()) {
-					canHandle = false;
+					canHandle = true;
 					break;
 				}
 			}

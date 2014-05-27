@@ -14,7 +14,9 @@ public class Player {
 	}
 	
 	public void addEquipement(Handler item) {
-		equipement.getLast().setSuccessor(item);
+		if(equipement.size() != 0) {
+			equipement.getLast().setSuccessor(item);
+		}
 		equipement.addLast(item);
 	}
 
@@ -26,8 +28,8 @@ public class Player {
 	}
 
 	public void handleRequest(Threat threat) {
-		if(equipement.getFirst()) {
-			
+		if(equipement.size() != 0) {
+			equipement.getFirst().handleRequest(threat);
 		}
 	}
 }
