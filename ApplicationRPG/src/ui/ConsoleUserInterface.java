@@ -2,17 +2,17 @@ package ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.PrintStream;
 
 
 public class ConsoleUserInterface implements UserInterface {
     
     private BufferedReader in;
-    private PrintWriter out;
+    private PrintStream out;
     
     private ConsoleUserInterface() {
         in = new BufferedReader(new InputStreamReader(System.in));
-        out = new PrintWriter(System.out);
+        out = System.out;
     }
     
     private static class Instance { 
@@ -29,27 +29,27 @@ public class ConsoleUserInterface implements UserInterface {
         out.flush();
     }
     
-    @Override
-    public void clear()
-    {
-        try
-        {
-            final String os = System.getProperty("os.name");
-
-            if (os.contains("Windows"))
-            {
-                Runtime.getRuntime().exec("cls");
-            }
-            else
-            {
-                Runtime.getRuntime().exec("clear");
-            }
-        }
-        catch (final Exception e)
-        {
-            //  Handle any exceptions.
-        }
-    }
+//    @Override
+//    public void clear()
+//    {
+//        try
+//        {
+//            final String os = System.getProperty("os.name");
+//
+//            if (os.contains("Windows"))
+//            {
+//                Runtime.getRuntime().exec("cls");
+//            }
+//            else
+//            {
+//                Runtime.getRuntime().exec("clear");
+//            }
+//        }
+//        catch (final Exception e)
+//        {
+//            //  Handle any exceptions.
+//        }
+//    }
     
     @Override
     public String getLine() {
@@ -60,12 +60,5 @@ public class ConsoleUserInterface implements UserInterface {
             e.printStackTrace();
         }
         return message;
-    }
-    
-    public static void main(String[] args) {
-        UserInterface ui = ConsoleUserInterface.getInstance();
-        ui.print("Enter something");
-        ui.print(ui.getLine());
-    }
-    
+    }    
 }

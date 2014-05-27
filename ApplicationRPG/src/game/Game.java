@@ -1,4 +1,7 @@
 package game;
+
+import ui.ConsoleUserInterface;
+import ui.UserInterface;
 import gameContent.MosquitoHandler;
 import gameContent.MosquitoSwarm;
 
@@ -6,6 +9,8 @@ import gameContent.MosquitoSwarm;
 public class Game {
 
 	public static void main(String[] args) {
+		UserInterface ui = ConsoleUserInterface.getInstance(); //TODO : à utiliser pour geline()
+		
 		Player player = new Player(10, 10);
 		MosquitoHandler mosquitoHandler = new MosquitoHandler(10);
 		MosquitoHandler mosquitoHandler2 = new MosquitoHandler(10);
