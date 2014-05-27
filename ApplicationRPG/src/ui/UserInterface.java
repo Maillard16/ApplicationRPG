@@ -20,7 +20,7 @@ public abstract class UserInterface {
         UserInterface.instance = (UserInterface) c.newInstance();
     }
 
-    public abstract void printLn(String message);
+    public abstract void println(String message);
     public abstract String getLine();
 
 }
