@@ -1,15 +1,19 @@
 package game;
 
+import java.util.Random;
+
 import ui.ConsoleUserInterface;
 import ui.UserInterface;
+import gameContent.Food;
 import gameContent.Handler;
+import gameContent.Knife;
 import gameContent.Place;
 import gameContent.Shirt;
 
 
 public class Game {
 	
-	Player player;
+	private Player player;
 	
 	public Game() {
 		try {
@@ -24,6 +28,7 @@ public class Game {
 		Place.shore.showInfo();
 		
 		player.addEquipement(new Shirt());
+		player.addEquipement(new Knife());
 		
 		
 		String command;
@@ -55,8 +60,8 @@ public class Game {
 						while(equipement != null) {
 							if(!equipement.isDestroyed()) {
 								System.out.println(equipement.getClass().getSimpleName());
-								equipement = equipement.getSuccessor();
 							}
+							equipement = equipement.getSuccessor();
 						}
 						break;
 					case "help" :

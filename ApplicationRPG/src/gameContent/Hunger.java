@@ -16,7 +16,7 @@ public class Hunger extends Threat {
 	}
 
 	public void attackMessage() {
-		System.out.println("Après 1 jour de recherche vous avez faim.");
+		System.out.println("Les recherches durent " + hungerDuration + " jours. Vous avez faim.");
 	}
 
 	public int getHungerDuration() {

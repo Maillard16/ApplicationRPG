@@ -3,8 +3,13 @@ package gameContent;
 import game.Player;
 
 import java.util.LinkedList;
+import java.util.Random;
+
+import ui.UserInterface;
 
 public abstract class Place {
+	
+	private static Random randomGenerator = new Random();
 	
 	public static Place 
 		shore = new Place("rivage", "Marchant sur la grève vers la terre, vous tâcher de vous repérer.\nD’après la carte, au nord devrait se trouver un village du nom de Foulit. Au nord-ouest, la forêt de Sherwood. Au nord-est, le monastère côtier de Lindisfarne.", "Vous êtes un jeune aventurier ayant fui la justice de votre contrée natale.\nVous voguez vers le pays d’Orghal en traversant la mer d’Embarh.\nAlors que votre frêle esquif se rapproche de la côte vous mettez en panne, observant votre objectif.\nVous en savez peu sur ce contient. On raconte qu’il est peuplé de créatures étranges et comporte des régions aux environnements très variés.\nOn dit aussi que la vie y est rude. Les habitants y sont sans cesse sous la menace d’une nouvelle guerre entre seigneurs et certains d’entre eux seraient des plus sauvages.\nUn lieu de tous les dangers certes, mais aux grandes richesses pour celui qui est assez téméraire pour les braver. Et de toute façon, il est hors de question de retourner en arrière.\nDans la précipitation du départ vous n’avez guère emporté d’équipement. Des vêtements estivaux, une escarcelle peu remplie, un couteau et une canne à pêche de fortune pour le voyage.\nCela fait des semaines que vous êtes en mer. La faim vous tiraille. Vous êtes impatient d’accoster.\nHeureusement, vous êtes plus ou moins parvenus à tenir votre cap et êtes arrivé à l’endroit prévu.\nVotre carte vendue par des contrebandiers signale une crique proche que vous repérer au bout d’un moment avant d’y amarrer votre bateau.") {
@@ -13,7 +18,7 @@ public abstract class Place {
 				for (String action : possibleActions) {
 					if(action.equals(commandChunks[0])) {
 						switch (action) {
-							case "pecher" : System.out.println("vous pechez");
+							case "pecher" : System.out.println("vous pechez"); //TODO
 											return;
 						}
 					}
@@ -22,13 +27,24 @@ public abstract class Place {
 			}
 			public void welcomPlayer(Player target) {super.welcomPlayer(target);}
 		},
-		sherwoodForest = new Place("foret", "Vous vous tenez dans l’herbe sous l’épaisse frondaison.", "Vous entrez dans la forêt de Sherwood.\nLes grands arbres assombrissent considérablement le ciel et le sol foisonne de verdure humide et poisseuse à cause de la mer proche.\nLa forêt est traversée par une route reliant des villages côtiers et celui de Foulit. Ça en fait une bonne tanière pour des brigands de grand-chemins.") {
+		sherwoodForest = new Place("foret", "Vous vous tenez dans l’herbe sous l’épaisse frondaison.", "Vous entrez dans la forêt de Sherwood.\nLes grands arbres assombrissent considérablement le ciel et le sol foisonne de verdure humide et poisseuse à cause de la mer proche.\nLa forêt est traversée par une route reliant des villages côtiers et celui de Foulit ce qui en fait une bonne tanière pour des brigands de grand-chemins. En la suivant dans l'autre sens on traverse le marais de Grimbaugh.") {
 			public void handleCommand(String command) {
 				String[] commandChunks = command.split(" ");
 				for (String action : possibleActions) {
 					if(action.equals(commandChunks[0])) {
 						switch (action) {
 							case "chasser" : System.out.println("vous chassez");
+											if(randomGenerator.nextBoolean()) {
+												new Fight(new Ennemi("lièvre",4,0,4)).attack(player);
+												System.out.println("vous récupérez 1 unité de nourriture");
+												player.addEquipement(new Food());
+											} else {
+												new Fight(new Ennemi("sanglier",8,4,0)).attack(player);
+												System.out.println("vous récupérez 3 unités de nourriture");
+												player.addEquipement(new Food());
+												player.addEquipement(new Food());
+												player.addEquipement(new Food());
+											}
 											return;
 						}
 					}
@@ -38,9 +54,28 @@ public abstract class Place {
 			public void welcomPlayer(Player target) {super.welcomPlayer(target);}
 		},
 		foulitTavern = new Place("taverne", "Vous entrez dans la taverne du poney qui tousse. L’odeur de la bière, de la sueur et du renfermé vous assaille. Il vous semble qu’il n’y ait que les clients habituels, puis vous remarquer un homme au teint halé, portant un capuchon pointu, assis seul dans un coin.", "") {
-//			public void handleCommand(String command) {
-//				
-//			}
+			
+			public void handleCommand(String command) {
+				String[] commandChunks = command.split(" ");
+				for (String action : possibleActions) {
+					if(action.equals(commandChunks[0])) {
+						switch (action) {
+							case "parlerClient" : 
+											System.out.println("Vous adressez un signe de tête à l’homme encapuchonné et vous asseyez à une table proche. Au bout d’un moment il se lève et s’assied devant vous.\nVous examinez son visage. Il a les yeux bridés et une moustache descendant jusqu’au menton. Il vous scrute en retour, prenant visiblement son temps pour vous jauger puis finit par parler.\n« Il paraît que tu es quelqu’un qui sait ce qui est bon pour lui. »\nIl marque une pause. Vous continuez de le toisez puis répondez.\n«  C’est possible. Après tout chaque homme se doit de se faire une place dans le monde. »\nEncore une pause. L’homme reprend.\n« Tu sembles vouloir faire la tienne au fil de l’épée. »\nVous vous figez tous deux, la main sur l’épée. Pendant un instant qui semble durer une heure vous pensez avoir affaire à un chasseur de prime. Le château du comte Von Drekkenov n’est pas si loin et il est réputé pour faire la chasse à la petite racaille.\nL’homme finit par sourire sournoisement.\n« A combien se vende les mercenaires en ce moment ? » dit-il.\nVous affichez le même sourire. La tension se relâche.\n« Je suis Subotaï, voleur et archer. Je suis Hykranien, du grand ordre de Kerlait. Je cherche un compagnon pour mes … affaires. »\nIl s’assure que personne n’écoute puis continue.\n« D’après mes informations, les moines de Lindisfarne ont été chargés de veiller sur la clé permettant d’accéder à l’œil de Magnus. »\nVoyant que vous ne réagissez, pas il explique.\n« Je sais que tu es étranger. Mais je vais tâcher de parler rapidement.\nD’après la légende, c’est un orbe magique d’une puissance prodigieuse. Les elfes sont censés l’avoir abandonné dans la tour de Muytak mais personne n’a réussi à y pénétrer. Il n’y a pas de porte et les murs semblent protégés par un enchantement.»\nLes elfes ? Il paraitrait que ce sont des créatures mystiques. Dotés de grands pouvoirs magiques ils auraient foulé le monde avant les hommes. On prétend qu’ils ont défié les dieux et ont disparus.\nVous demandez : « Tu crois à ces histoires ?  Comment sais-tu que les moines détiennent un tel secret ? »\n« Mes informations sont vraies. Elles viennent d’une guilde de mages dangereux. Ils veulent avoir la certitude du contenu de la tour de Muytak. Mais j’ai besoin d’aide. « Bon admettons. Quel est ton plan ? »\n« J’ai besoin de temps pour préparer l’expédition. Procure nous des torches et retrouve-moi ici. Tu pourrais allez voir les fermes de l’autre côté du village. »\n");
+											foulitFarm.addPossibleAction("volerLaReserve");
+											foulitTavern.removePossibleAction("parlerClient");
+											return;
+							case "parlerASubotai" : 
+											System.out.println("\"Bon j'ai du nouveau. Au fil des siècles, la clé de la tour, les sphères de visions, ont été perdues. On devrait les trouver dans les mines de Tenguril qui plongent dans le coeur de la montange Morltour. C'est sur le chemin de la tour de Muytak ! Allons-y, c'est vers l'est depuis le village.»\n");
+											System.out.println("\"Prend ce parapluie, il y a souvent des tempêtes sur la montange\"");
+											player.addEquipement(new Umbrella(2));
+											foulitTavern.removePossibleAction("parlerASubotai");
+											return;
+						}
+					}
+				}
+				System.out.println("commande inconnue");				
+			}
 			public void welcomPlayer(Player target) {super.welcomPlayer(target);}
 		},
 		foulitMarket = new Place("marché", "Vous êtes au marché de Foulit.\nVentes possibles : nourriture\nAchats possibles : anti-moustique", "") {
@@ -51,7 +86,7 @@ public abstract class Place {
 						switch (action) {
 							case "acheter" :
 								if(commandChunks.length < 2) {
-									System.out.println("Donner objet.");
+									System.out.println("Préciser objet.");
 									return;
 								}
 								switch(commandChunks[1]) {
@@ -71,7 +106,7 @@ public abstract class Place {
 								}
 								case "vendre" :
 									if(commandChunks.length < 2) {
-										System.out.println("Donner objet.");
+										System.out.println("Préciser objet.");
 										return;
 									}
 									switch(commandChunks[1]) {
@@ -123,6 +158,55 @@ public abstract class Place {
 			}
 			public void welcomPlayer(Player target) {super.welcomPlayer(target);}
 		},
+		foulitFarm = new Place("ferme", "Vous arrivez à la ferme du vieux Gérard", "") {
+			public void handleCommand(String command) {
+				String[] commandChunks = command.split(" ");
+				for (String action : possibleActions) {
+					if(action.equals(commandChunks[0])) {
+						switch (action) {
+							case "volerLaReserve" : 
+											System.out.println("Vous vous rapprochez sournoisement de la réserve quand, semblant surgir de nul part, le propriétaire vous interpelle dans votre dos.");
+											System.out.println("\"Hola aventurier !\"");
+											System.out.println("Vous vous retournez lentement. Le viel homme est connu pour sa verbe. Vous pouvez l'assomer tout de suite et prendre le risque qu'il appelle la garde ou tentez de le faire partir pour revenir à votre larcin.");
+											
+											foulitFarm.removePossibleAction("volerLaReserve");
+											foulitFarm.addPossibleAction("assomerGerard");
+											foulitFarm.addPossibleAction("ecouterGerard");
+											return;
+							case "assomerGerard" :
+											System.out.println("Vous cacher Gérard dans la réserve avant de vous emparer de torches.");
+											
+											player.addEquipement(new Torch());
+											
+											foulitTavern.addPossibleAction("parlerASubotai");
+											foulitFarm.removePossibleAction("assomerGerard");
+											foulitFarm.removePossibleAction("ecouterGerard");
+											return;
+											
+							case "ecouterGerard" :
+											String[] text = new String[]{"\"On m’a vanté votre caractère affable et vos manières révérencieuses.\"", "\"On vous dit âpres à la tâche et bienveillant avec les humbles gens.\"", "\"Mon étançon s’est brisé et la vétusté de mon araire n’a d’égal que l’état d’affliction en lequel vous me trouvez.\"", "\"De grâce, si d’aventure le resserre de Kerwik se trouve sur votre chemin, passez y prendre ces quelques pièces ouvrées qui me font tant défaut.\"", "Vous affichez un grand sourire et hochez la tête, espérant qu'il parte bientôt.", "Il marmone un moment et détourne le regard.", "\"mmmh oui c'est bien malheureux\"", "...", "Il vous regarde, soudainement plein d'entrain", "\"Mais vous avez l'allure d'un brave jeune homme\"", "\"La bonne mère Michelle était comblée de votre action.\"", "\"Et je vous en féclicite moi-même !\"", "\"Aujourd'hui les gens ne s'entraident plus.\"", "\"De mon temps s'aurait été une honte de laisser une bonne dame comme ça dans l'embaras !\"", "\"Maintenant, avec tous ces immigrés basanés ...\"", "\"Enfin. Vous au moi êtes bien coloré !\"", "\"D'ailleurs vous êtiez venu pour quelque chose ?\"", "Vous vous figez sur place.", "\"Heu oui. J'aurais besoin de torches pour ... pour chasser les rats de la cave de monsieur Remblin.\"", "\"Ah ! Ah oui ! Bien connu le père à lui ! C'est un brave petit gars.\"", "il se remet à marmoner", "\"Pas comme son fils qui a épousé la Aïsha ...\"", "\"Et ben en tout cas servez vous sans problème !\"", "Vous vous retournez vers la réserve.", "\"Mmmh Ah et prenez aussi ça. Je n'en ai guère besoin dorénavant. Mais vous risquez vous de le nécessiter promptement si vous croisez des bandits sur la route de Kerwick.", "Il vous donne un casque de la réserve.", "\"Ha je me souviens du temps où je servais dans la légion !\"", "\"Nous partîmes cinq cents\"", "\"mais par un prompt renfort. Nous nous vîmes trois mille en arrivant au port.\"", "Alors qu'il se tourne en continuant de divaguer vous vous eclipsez."};								
+											System.out.println("(utiliser ENTER pour faire défiler le texte)");
+											
+											UserInterface ui = UserInterface.getInstance();
+											for(String phrase : text) {
+												System.out.println(phrase);
+												ui.getLine();
+											}
+											
+											player.addEquipement(new Torch());
+											player.addEquipement(new Helmet(10));
+											
+											foulitTavern.addPossibleAction("parlerASubotai");
+											foulitFarm.removePossibleAction("assomerGerard");
+											foulitFarm.removePossibleAction("ecouterGerard");
+											return;
+						}
+					}
+				}
+				System.out.println("commande inconnue");			
+			}
+			public void welcomPlayer(Player target) {super.welcomPlayer(target);}
+		},
 		grimbaughSwamp = new Place("marais", "Vous progressez difficilement en pataugeant.", "") {
 			public void handleCommand(String command) {
 				String[] commandChunks = command.split(" ");
@@ -141,14 +225,8 @@ public abstract class Place {
 			}
 			public void welcomPlayer(Player target) {
 				super.welcomPlayer(target);
-				new MosquitoSwarm(15).attack(target);
+				new MosquitoSwarm(8).attack(target);
 			}
-		},
-		foulitFarm = new Place("ferme", "Vous arrivez à la ferme du vieux Gérard", "") {
-//			public void handleCommand(String command) {
-//				
-//			}
-			public void welcomPlayer(Player target) {super.welcomPlayer(target);}
 		},
 		morltourMountain = new Place("montagne", "Vous grimpez la montagne enneigée.", "") {
 //			public void handleCommand(String command) {
@@ -160,12 +238,33 @@ public abstract class Place {
 			}
 		},
 		tengurilMine = new Place("mine", "Vous avancez prudemment dans les ténèbres.", "") {
-//			public void handleCommand(String command) {
-//			
-//			}
+			public void handleCommand(String command) {
+				String[] commandChunks = command.split(" ");
+				for (String action : possibleActions) {
+					if(action.equals(commandChunks[0])) {
+						switch (action) {
+							case "avancer" : Darkness darkness = new Darkness();
+											darkness.attack(player);
+											if(!darkness.isThreatening()) {
+												tengurilMine.removePossibleAction("avancer");
+												tengurilMine.addPossibleAction("chercherSphere");
+												tengurilMine.addConnectedPlace(muytakTower);
+											}
+										    return;
+							case "chercherSphere" :
+											new Hunger(3).attack(player);
+											  System.out.println("Vous trouvez les sphères de vision !");
+											  grimbaughSwamp.removePossibleAction("chercherSphere");
+											  //TODO : addItem
+											return;
+						}
+					}
+				}
+				System.out.println("commande inconnue");
+			}
 			public void welcomPlayer(Player target) {
 				super.welcomPlayer(target);
-				new Rockfall(5).attack(target);
+				new Rockfall(5).attack(target); //TODO : bug perte de vie si parapluie + casque ?
 			}
 		},
 		muytakTower = new Place("tour", "Vous vous tenez au pied de la tour de Muytak.", "Vous êtes face à la fameuse tour de Muytak. Ses murs blanc nâcre s'élèvent sur un apic rocheux. Surmontée d'un toît de tuile noir, elle ne possède ni porte ni fenêtre. L'air autour semble vibrer d'énergie magique. Vos pensées se brouillent alors que vous la regardez trop longtemps.") {
@@ -214,7 +313,7 @@ public abstract class Place {
 		morltourMountain.addConnectedPlace(tengurilMine);
 		morltourMountain.addConnectedPlace(foulitVillage);
 		
-		tengurilMine.addConnectedPlace(muytakTower);
+		tengurilMine.addPossibleAction("avancer");
 		tengurilMine.addConnectedPlace(morltourMountain);
 		
 		muytakTower.addConnectedPlace(tengurilMine);

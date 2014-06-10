@@ -16,7 +16,7 @@ public class Rockfall extends FallingThreat {
 
 	@Override
 	public void attackMessage() {
-		System.out.println("Des rochers vous tombe dessus !");
+		System.out.println("Des rochers vous tombent dessus !");
 	}
 
 }

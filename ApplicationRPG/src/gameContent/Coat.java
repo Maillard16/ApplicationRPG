@@ -17,7 +17,7 @@ public class Coat extends Handler {
     		    	
         if(canHandle(threat)) {
             System.out.println("Le manteau vous protège du froid.");
-            threat.setIsThreatning(false);
+            ((ColdWind)threat).setColdness(0);
         }
     	super.handleRequest(threat);
     }

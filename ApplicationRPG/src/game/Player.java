@@ -98,6 +98,7 @@ public class Player {
 			if(!equipement.isDestroyed() && equipement.getClass() == equipementClass) {
 				return equipement;
 			}
+			equipement = equipement.getSuccessor();
 		}
 		return null;
 	}
