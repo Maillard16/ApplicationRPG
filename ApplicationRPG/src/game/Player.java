@@ -91,4 +91,14 @@ public class Player {
 	public void setMoney(int money) {
 		this.money = money;
 	}
+	
+	public Handler posessEquipement(Class equipementClass) {
+		Handler equipement = this.equipement;
+		while(equipement != null) {
+			if(!equipement.isDestroyed() && equipement.getClass() == equipementClass) {
+				return equipement;
+			}
+		}
+		return null;
+	}
 }

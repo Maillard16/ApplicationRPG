@@ -7,7 +7,7 @@ import java.util.LinkedList;
 public abstract class Place {
 	
 	public static Place 
-		shore = new Place("Rivage", "Marchant sur la grève vers la terre, vous tâcher de vous repérer.\nD’après la carte, au nord devrait se trouver un village du nom de Foulit. Au nord-ouest, la forêt de Sherwood. Au nord-est, le monastère côtier de Lindisfarne.", "Vous êtes un jeune aventurier ayant fui la justice de votre contrée natale.\nVous voguez vers le pays d’Orghal en traversant la mer d’Embarh.\nAlors que votre frêle esquif se rapproche de la côte vous mettez en panne, observant votre objectif.\nVous en savez peu sur ce contient. On raconte qu’il est peuplé de créatures étranges et comporte des régions aux environnements très variés.\nOn dit aussi que la vie y est rude. Les habitants y sont sans cesse sous la menace d’une nouvelle guerre entre seigneurs et certains d’entre eux seraient des plus sauvages.\nUn lieu de tous les dangers certes, mais aux grandes richesses pour celui qui est assez téméraire pour les braver. Et de toute façon, il est hors de question de retourner en arrière.\nDans la précipitation du départ vous n’avez guère emporté d’équipement. Des vêtements estivaux, une escarcelle peu remplie, un couteau et une canne à pêche de fortune pour le voyage.\nCela fait des semaines que vous êtes en mer. La faim vous tiraille. Vous êtes impatient d’accoster.\nHeureusement, vous êtes plus ou moins parvenus à tenir votre cap et êtes arrivé à l’endroit prévu.\nVotre carte vendue par des contrebandiers signale une crique proche que vous repérer au bout d’un moment avant d’y amarrer votre bateau.") {
+		shore = new Place("rivage", "Marchant sur la grève vers la terre, vous tâcher de vous repérer.\nD’après la carte, au nord devrait se trouver un village du nom de Foulit. Au nord-ouest, la forêt de Sherwood. Au nord-est, le monastère côtier de Lindisfarne.", "Vous êtes un jeune aventurier ayant fui la justice de votre contrée natale.\nVous voguez vers le pays d’Orghal en traversant la mer d’Embarh.\nAlors que votre frêle esquif se rapproche de la côte vous mettez en panne, observant votre objectif.\nVous en savez peu sur ce contient. On raconte qu’il est peuplé de créatures étranges et comporte des régions aux environnements très variés.\nOn dit aussi que la vie y est rude. Les habitants y sont sans cesse sous la menace d’une nouvelle guerre entre seigneurs et certains d’entre eux seraient des plus sauvages.\nUn lieu de tous les dangers certes, mais aux grandes richesses pour celui qui est assez téméraire pour les braver. Et de toute façon, il est hors de question de retourner en arrière.\nDans la précipitation du départ vous n’avez guère emporté d’équipement. Des vêtements estivaux, une escarcelle peu remplie, un couteau et une canne à pêche de fortune pour le voyage.\nCela fait des semaines que vous êtes en mer. La faim vous tiraille. Vous êtes impatient d’accoster.\nHeureusement, vous êtes plus ou moins parvenus à tenir votre cap et êtes arrivé à l’endroit prévu.\nVotre carte vendue par des contrebandiers signale une crique proche que vous repérer au bout d’un moment avant d’y amarrer votre bateau.") {
 			public void handleCommand(String command) {
 				String[] commandChunks = command.split(" ");
 				for (String action : possibleActions) {
@@ -22,7 +22,7 @@ public abstract class Place {
 			}
 			public void welcomPlayer(Player target) {super.welcomPlayer(target);}
 		},
-		sherwoodForest = new Place("Foret", "Vous vous tenez dans l’herbe sous l’épaisse frondaison.", "Vous entrez dans la forêt de Sherwood.\nLes grands arbres assombrissent considérablement le ciel et le sol foisonne de verdure humide et poisseuse à cause de la mer proche.\nLa forêt est traversée par une route reliant des villages côtiers et celui de Foulit. Ça en fait une bonne tanière pour des brigands de grand-chemins.") {
+		sherwoodForest = new Place("foret", "Vous vous tenez dans l’herbe sous l’épaisse frondaison.", "Vous entrez dans la forêt de Sherwood.\nLes grands arbres assombrissent considérablement le ciel et le sol foisonne de verdure humide et poisseuse à cause de la mer proche.\nLa forêt est traversée par une route reliant des villages côtiers et celui de Foulit. Ça en fait une bonne tanière pour des brigands de grand-chemins.") {
 			public void handleCommand(String command) {
 				String[] commandChunks = command.split(" ");
 				for (String action : possibleActions) {
@@ -37,24 +37,28 @@ public abstract class Place {
 			}
 			public void welcomPlayer(Player target) {super.welcomPlayer(target);}
 		},
-		foulitTavern = new Place("Taverne", "Vous entrez dans la taverne du poney qui tousse. L’odeur de la bière, de la sueur et du renfermé vous assaille. Il vous semble qu’il n’y ait que les clients habituels, puis vous remarquer un homme au teint halé, portant un capuchon pointu, assis seul dans un coin.", "") {
+		foulitTavern = new Place("taverne", "Vous entrez dans la taverne du poney qui tousse. L’odeur de la bière, de la sueur et du renfermé vous assaille. Il vous semble qu’il n’y ait que les clients habituels, puis vous remarquer un homme au teint halé, portant un capuchon pointu, assis seul dans un coin.", "") {
 //			public void handleCommand(String command) {
 //				
 //			}
 			public void welcomPlayer(Player target) {super.welcomPlayer(target);}
 		},
-		foulitMarket = new Place("Marché", "Vous êtes au marché de Foulit", "") {
+		foulitMarket = new Place("marché", "Vous êtes au marché de Foulit.\nVentes possibles : nourriture\nAchats possibles : anti-moustique", "") {
 			public void handleCommand(String command) {
 				String[] commandChunks = command.split(" ");
 				for (String action : possibleActions) {
 					if(action.equals(commandChunks[0])) {
 						switch (action) {
 							case "acheter" :
+								if(commandChunks.length < 2) {
+									System.out.println("Donner objet.");
+									return;
+								}
 								switch(commandChunks[1]) {
 									case "anti-moustique" :
-										if(player.getMoney() >= 5) {
+										if(player.getMoney() >= 15) {
 											System.out.println("Vous achetez un spray anti-moustique.");
-											player.setMoney(player.getMoney() - 5);
+											player.setMoney(player.getMoney() - 15);
 											player.addEquipement(new MosquitoHandler(10));
 										} else {
 											System.out.println("Vous êtes trop pauvre.");
@@ -65,11 +69,22 @@ public abstract class Place {
 										System.out.println("impossible");
 										return;
 								}
-							case "vendre" :
-								switch(commandChunks[1]) {
-								case "nouriture" :
-									
-									return;
+								case "vendre" :
+									if(commandChunks.length < 2) {
+										System.out.println("Donner objet.");
+										return;
+									}
+									switch(commandChunks[1]) {
+									case "nourriture" :
+										Food playerFood = (Food) player.posessEquipement(Food.class);
+										if(playerFood != null) {
+											System.out.println("Vous vendez de la nourriture.");
+											player.setMoney(player.getMoney() + 5);
+											playerFood.setDestroyed(true);
+										} else {
+											System.out.println("Vous n'avez pas de nourriture à vendre.");
+										}
+										return;
 								default :
 									System.out.println("impossible");
 									return;
@@ -81,7 +96,7 @@ public abstract class Place {
 			}
 			public void welcomPlayer(Player target) {super.welcomPlayer(target);}
 		},
-		foulitVillage = new Place("Village", "Vous êtes sur la place du village", "Le village de Foulit est modeste et son économie agraire. Cependant, étant au carrefour de la route longeant la côte et de celle plongeant au cœur de la région d’Engall, il a au fil des ans attiré marchands et artisans et finis par mériter de figurer sur une carte.") {
+		foulitVillage = new Place("village", "Vous êtes sur la place du village", "Le village de Foulit est modeste et son économie agraire. Cependant, étant au carrefour de la route longeant la côte et de celle plongeant au cœur de la région d’Engall, il a au fil des ans attiré marchands et artisans et finis par mériter de figurer sur une carte.") {
 			public void handleCommand(String command) {
 				String[] commandChunks = command.split(" ");
 				for (String action : possibleActions) {
@@ -108,7 +123,7 @@ public abstract class Place {
 			}
 			public void welcomPlayer(Player target) {super.welcomPlayer(target);}
 		},
-		grimbaughSwamp = new Place("Marais", "Vous progressez difficilement en pataugeant.", "") {
+		grimbaughSwamp = new Place("marais", "Vous progressez difficilement en pataugeant.", "") {
 			public void handleCommand(String command) {
 				String[] commandChunks = command.split(" ");
 				for (String action : possibleActions) {
@@ -129,13 +144,13 @@ public abstract class Place {
 				new MosquitoSwarm(15).attack(target);
 			}
 		},
-		foulitFarm = new Place("Ferme", "Vous arrivez à la ferme du vieux Gérard", "") {
+		foulitFarm = new Place("ferme", "Vous arrivez à la ferme du vieux Gérard", "") {
 //			public void handleCommand(String command) {
 //				
 //			}
 			public void welcomPlayer(Player target) {super.welcomPlayer(target);}
 		},
-		morltourMountain = new Place("Montagne", "Vous grimpez la montagne enneigée.", "") {
+		morltourMountain = new Place("montagne", "Vous grimpez la montagne enneigée.", "") {
 //			public void handleCommand(String command) {
 //			
 //			}
@@ -144,7 +159,7 @@ public abstract class Place {
 				new ColdWind(5).attack(target);
 			}
 		},
-		tengurilMine = new Place("Mine", "Vous avancez prudemment dans les ténèbres.", "") {
+		tengurilMine = new Place("mine", "Vous avancez prudemment dans les ténèbres.", "") {
 //			public void handleCommand(String command) {
 //			
 //			}
@@ -153,19 +168,19 @@ public abstract class Place {
 				new Rockfall(5).attack(target);
 			}
 		},
-		muytakTower = new Place("Tour", "Vous vous tenez au pied de la tour de Muytak.", "Vous êtes face à la fameuse tour de Muytak. Ses murs blanc nâcre s'élèvent sur un apic rocheux. Surmontée d'un toît de tuile noir, elle ne possède ni porte ni fenêtre. L'air autour semble vibrer d'énergie magique. Vos pensées se brouillent alors que vous la regardez trop longtemps.") {
+		muytakTower = new Place("tour", "Vous vous tenez au pied de la tour de Muytak.", "Vous êtes face à la fameuse tour de Muytak. Ses murs blanc nâcre s'élèvent sur un apic rocheux. Surmontée d'un toît de tuile noir, elle ne possède ni porte ni fenêtre. L'air autour semble vibrer d'énergie magique. Vos pensées se brouillent alors que vous la regardez trop longtemps.") {
 //			public void handleCommand(String command) {
 //				
 //			}
 			public void welcomPlayer(Player target) {super.welcomPlayer(target);}
 		},
-		lindisfarneMonastry = new Place("Monastere", "", "") {
+		lindisfarneMonastry = new Place("monastere", "", "") {
 //			public void handleCommand(String command) {
 //				
 //			}
 			public void welcomPlayer(Player target) {super.welcomPlayer(target);}
 		};
-	private static Place[] places = new Place[]{shore, sherwoodForest, grimbaughSwamp, muytakTower, tengurilMine, morltourMountain, foulitVillage, foulitTavern, foulitFarm, lindisfarneMonastry};
+	private static Place[] places = new Place[]{shore, sherwoodForest, grimbaughSwamp, muytakTower, tengurilMine, morltourMountain, foulitVillage, foulitTavern, foulitFarm, foulitMarket, lindisfarneMonastry};
 	
 	static {
 		shore.addPossibleAction("pecher");
@@ -184,6 +199,7 @@ public abstract class Place {
 		foulitVillage.addPossibleAction("visiter");
 		foulitVillage.addConnectedPlace(foulitTavern);
 		foulitVillage.addConnectedPlace(foulitFarm);
+		foulitVillage.addConnectedPlace(foulitMarket);
 		foulitVillage.addConnectedPlace(morltourMountain);
 		foulitVillage.addConnectedPlace(sherwoodForest);
 		
@@ -191,11 +207,15 @@ public abstract class Place {
 		
 		foulitFarm.addConnectedPlace(foulitVillage);
 		
-		morltourMountain.addConnectedPlace(tengurilMine);
+		foulitMarket.addPossibleAction("acheter");
+		foulitMarket.addPossibleAction("vendre");
+		foulitMarket.addConnectedPlace(foulitVillage);
 		
-		tengurilMine.addConnectedPlace(morltourMountain);
+		morltourMountain.addConnectedPlace(tengurilMine);
+		morltourMountain.addConnectedPlace(foulitVillage);
 		
 		tengurilMine.addConnectedPlace(muytakTower);
+		tengurilMine.addConnectedPlace(morltourMountain);
 		
 		muytakTower.addConnectedPlace(tengurilMine);
 	}

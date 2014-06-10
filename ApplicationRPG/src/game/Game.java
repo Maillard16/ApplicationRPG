@@ -35,6 +35,11 @@ public class Game {
 				commandChunks = command.split(" ");
 				switch (commandChunks[0]) { //TODO : stunned
 					case "go" :
+						if(commandChunks.length < 2) {
+							System.out.println("Donner destination.");
+							break;
+						}
+						
 						Place place = Place.getPlaceByName(commandChunks[1]);
 						if(place == null) {
 							System.out.println("Destination inconnue.");
@@ -48,8 +53,10 @@ public class Game {
 						System.out.println("Equipement : ");
 						Handler equipement = player.getEquipement();
 						while(equipement != null) {
-							System.out.println(equipement.getClass().getSimpleName());
-							equipement = equipement.getSuccessor();
+							if(!equipement.isDestroyed()) {
+								System.out.println(equipement.getClass().getSimpleName());
+								equipement = equipement.getSuccessor();
+							}
 						}
 						break;
 					case "help" :
