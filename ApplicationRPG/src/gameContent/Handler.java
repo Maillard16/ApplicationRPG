@@ -26,8 +26,8 @@ public abstract class Handler {
     	boolean canHandle = isDestroyed == false;
     	if(canHandle) {
     		canHandle = false;
-    		for (Class threatClass : handableThreat) {
-				if(threatClass == threat.getClass()) {
+    		for (Class handableClass : handableThreat) {
+				if(handableClass == threat.getClass()) {
 					canHandle = true;
 					break;
 				}
@@ -39,6 +39,11 @@ public abstract class Handler {
 	public void setSuccessor(Handler handler) {
 		successor = handler;		
 	}
+	
+	public Handler getSuccessor() {
+		return successor;		
+	}
+	
 	
     public boolean isDestroyed() {
 		return isDestroyed;
