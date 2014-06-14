@@ -3,6 +3,8 @@ package gameContent.handler;
 import gameContent.threat.MosquitoSwarm;
 import gameContent.threat.Threat;
 
+import ui.UserInterface;
+
 public class MosquitoHandler extends Handler {
     
     private int sprayLoad;
@@ -15,26 +17,25 @@ public class MosquitoHandler extends Handler {
     public void handleRequest(Threat threat) {
     		    	
         if(canHandle(threat)) {
-            System.out.println("Le spray anti-moustique marche.");
+        	UserInterface.getInstance().println("Le spray anti-moustique marche.");
             
             int killedMosqutoNbr = Math.min(sprayLoad, ((MosquitoSwarm)threat).getThreatLevel());
             sprayLoad -= killedMosqutoNbr;
             ((MosquitoSwarm)threat).setThreatLevel(((MosquitoSwarm)threat).getThreatLevel() - killedMosqutoNbr);
             
-            System.out.println("Vous tuez " + killedMosqutoNbr + " moustiques.");
+            UserInterface.getInstance().println("Vous tuez " + killedMosqutoNbr + " moustiques.");
             
             if(((MosquitoSwarm)threat).isThreatening()) {
-                System.out.println("Il reste des moustiques.");
+            	UserInterface.getInstance().println("Il reste des moustiques.");
             } else {
-                System.out.println("Plus de moustiques.");
+            	UserInterface.getInstance().println("Plus de moustiques.");
             }
             
             if(sprayLoad <= 0) {
-                System.out.println("Le spray anti-moustique est vide.");
+            	UserInterface.getInstance().println("Le spray anti-moustique est vide.");
                 setDestroyed(true);
             }
         }
     	super.handleRequest(threat);
     }
-    
 }

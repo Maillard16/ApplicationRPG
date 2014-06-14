@@ -1,5 +1,6 @@
 package gameContent.threat;
 
+import ui.UserInterface;
 import game.Player;
 
 public class Darkness extends Threat {
@@ -9,7 +10,7 @@ public class Darkness extends Threat {
 
 	@Override
 	public void attackMessage() {
-		System.out.println("Il fait noir. Vous ne pouvez pas avancer.");
+		UserInterface.getInstance().println("Il fait noir. Vous ne pouvez pas avancer.");
 	}
 	
 	public void lightUp() {

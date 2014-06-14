@@ -1,5 +1,6 @@
 package gameContent.threat;
 
+import ui.UserInterface;
 import game.Player;
 
 public class HeadBlow extends PoweredThreat {
@@ -10,7 +11,7 @@ public class HeadBlow extends PoweredThreat {
 
 	@Override
 	public void attackMessage() {
-		System.out.println("On vous attaque à la tête !");
+		UserInterface.getInstance().println("On vous attaque à la tête !");
 	}
 
 }

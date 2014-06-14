@@ -1,5 +1,6 @@
 package gameContent.handler;
 
+import ui.UserInterface;
 import gameContent.threat.PoweredThreat;
 import gameContent.threat.HeadBlow;
 import gameContent.threat.Rockfall;
@@ -17,20 +18,20 @@ public class Helmet extends Handler {
 	public void handleRequest(Threat threat) {
     	
         if(canHandle(threat)) {
-            System.out.println("Le casque vous protège.");
+            UserInterface.getInstance().println("Le casque vous protège.");
             		
             int protectionGiven = Math.min(resistance, ((PoweredThreat)threat).getThreatLevel());
             resistance -= protectionGiven;
             ((PoweredThreat)threat).setThreatLevel(((PoweredThreat)threat).getThreatLevel() - protectionGiven);
             
             if(((PoweredThreat)threat).isThreatening()) {
-                System.out.println("Vous êtes toujours en danger.");
+                UserInterface.getInstance().println("Vous êtes toujours en danger.");
             } else {
-                System.out.println("Le danger est écarté.");
+                UserInterface.getInstance().println("Le danger est écarté.");
             }
             
             if(resistance <= 0) {
-                System.out.println("Le casque est détruit.");
+                UserInterface.getInstance().println("Le casque est détruit.");
                 setDestroyed(true);
             }
         }

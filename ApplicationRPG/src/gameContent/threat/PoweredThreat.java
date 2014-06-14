@@ -2,6 +2,10 @@ package gameContent.threat;
 
 import game.Player;
 
+/**
+ * Menace qui dispose d'un niveau de menace.
+ * Pour s'en débarrasser il faut le mettre à 0.
+ */
 public abstract class PoweredThreat extends Threat {
 	
 	private int threatLevel;

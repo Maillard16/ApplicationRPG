@@ -1,5 +1,6 @@
 package gameContent.threat;
 
+import ui.UserInterface;
 import game.Player;
 
 public class MagicWall extends Threat {
@@ -9,7 +10,7 @@ public class MagicWall extends Threat {
 
 	@Override
 	public void attackMessage() {
-		System.out.println("Un enchantement vous empêche de progresser.");
+		UserInterface.getInstance().println("Un enchantement vous empêche de progresser.");
 	}
 	
 	public void disappear() {

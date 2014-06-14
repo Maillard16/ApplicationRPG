@@ -1,5 +1,6 @@
 package gameContent.threat;
 
+import ui.UserInterface;
 import game.Ennemi;
 import game.Player;
 
@@ -19,7 +20,7 @@ public class Fight extends Threat {
 
 	@Override
 	public void attackMessage() {
-		System.out.println("Vous combattez un " + ennemi.getName());
+		UserInterface.getInstance().println("Vous combattez un " + ennemi.getName());
 	}
 
 	public Ennemi getEnnemi() {

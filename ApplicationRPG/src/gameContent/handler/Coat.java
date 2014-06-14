@@ -1,5 +1,6 @@
 package gameContent.handler;
 
+import ui.UserInterface;
 import gameContent.threat.ColdWind;
 import gameContent.threat.Threat;
 
@@ -15,7 +16,7 @@ public class Coat extends Handler {
     public void handleRequest(Threat threat) {
     		    	
         if(canHandle(threat)) {
-            System.out.println("Le manteau vous protège du froid.");
+            UserInterface.getInstance().println("Le manteau vous protège du froid.");
             ((ColdWind)threat).setThreatLevel(0);
         }
     	super.handleRequest(threat);

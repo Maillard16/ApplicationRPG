@@ -1,5 +1,7 @@
 package gameContent.threat;
 
+import ui.UserInterface;
+
 public class ColdWind extends PoweredThreat{
 	
     public ColdWind(int coldness) {
@@ -8,7 +10,7 @@ public class ColdWind extends PoweredThreat{
 	
 	@Override
 	public void attackMessage() {
-		System.out.println("Une bise glaciale vous atteint.");
+		UserInterface.getInstance().println("Une bise glaciale vous atteint.");
 	}
 
 }

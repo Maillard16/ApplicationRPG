@@ -1,5 +1,6 @@
 package gameContent.threat;
 
+import ui.UserInterface;
 import game.Player;
 
 public class Rockfall extends PoweredThreat {
@@ -10,7 +11,7 @@ public class Rockfall extends PoweredThreat {
 
 	@Override
 	public void attackMessage() {
-		System.out.println("Des rochers vous tombent dessus !");
+		UserInterface.getInstance().println("Des rochers vous tombent dessus !");
 	}
 
 }

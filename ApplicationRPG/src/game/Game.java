@@ -25,39 +25,39 @@ public class Game {
 		player.addEquipement(new Shirt());
 		player.addEquipement(new Weapon("couteau", 5));
 		
-		System.out.println("Bienvenue dans le jeu. \"help\" affiche les commandes.\n");
+		UserInterface.getInstance().println("Bienvenue dans le jeu. \"help\" affiche les commandes.\n");
 		Place.shore.welcomPlayer(player);
 		
 		
 		String command;
 		String[] commandChunks;
 		while(true) {
-			System.out.print("> ");
+			UserInterface.getInstance().print("> ");
 			command = ui.getLine();
 			if(!command.equals("Console Input Error")) {
 				commandChunks = command.split(" ");
 				switch (commandChunks[0]) {
 					case "go" :
 						if(commandChunks.length < 2) {
-							System.out.println("Donner destination.");
+							UserInterface.getInstance().println("Donner destination.");
 							break;
 						}
 						
 						Place place = Place.getPlaceByName(commandChunks[1]);
 						if(place == null) {
-							System.out.println("Destination inconnue.");
+							UserInterface.getInstance().println("Destination inconnue.");
 						} else {
 							player.goToPlace(place);
 						}
 						break;
 					case "status" :
-						System.out.println("Vies : " + player.getLives());
-						System.out.println("Argent : " + player.getMoney());
-						System.out.println("Equipement : ");
+						UserInterface.getInstance().println("Vies : " + player.getLives());
+						UserInterface.getInstance().println("Argent : " + player.getMoney());
+						UserInterface.getInstance().println("Equipement : ");
 						Handler equipement = player.getEquipement();
 						while(equipement != null) {
 							if(!equipement.isDestroyed()) {
-								System.out.println(equipement.getClass().getSimpleName());
+								UserInterface.getInstance().println(equipement.getClass().getSimpleName());
 							}
 							equipement = equipement.getSuccessor();
 						}
@@ -65,11 +65,11 @@ public class Game {
 					case "eat" :
 						Food playerFood = (Food) player.posessEquipement(Food.class);
 						if(playerFood != null) {
-							System.out.println("Vous mangez et gagnez 3 points de vie");
+							UserInterface.getInstance().println("Vous mangez et gagnez 3 points de vie");
 							player.gainLife(3);
 							playerFood.setDestroyed(true);
 						} else {
-							System.out.println("Vous n'avez pas de nourriture à manger.");
+							UserInterface.getInstance().println("Vous n'avez pas de nourriture à manger.");
 						}
 						break;
 					case "help" :
@@ -86,12 +86,12 @@ public class Game {
 	}
 	
 	public void showHelp() {
-		System.out.println("help - afficher l'aide");
-		System.out.println("go x - aller à x");
-		System.out.println("status - afficher votre status");
-		System.out.println("eat");
-		System.out.println("exit - quitter le jeu");
-		System.out.println("Endroit actuel :");
+		UserInterface.getInstance().println("help - afficher l'aide");
+		UserInterface.getInstance().println("go x - aller à x");
+		UserInterface.getInstance().println("status - afficher votre status");
+		UserInterface.getInstance().println("eat");
+		UserInterface.getInstance().println("exit - quitter le jeu");
+		UserInterface.getInstance().println("Endroit actuel :");
 		player.getCurrentPlace().showInfo();
 	}
 

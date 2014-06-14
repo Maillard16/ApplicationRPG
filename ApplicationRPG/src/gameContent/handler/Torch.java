@@ -1,5 +1,6 @@
 package gameContent.handler;
 
+import ui.UserInterface;
 import gameContent.threat.Darkness;
 import gameContent.threat.Threat;
 
@@ -11,7 +12,7 @@ public class Torch extends Handler {
     public void handleRequest(Threat threat) {
     		    	
         if(canHandle(threat)) {
-            System.out.println("Vous vous éclairez avec une torche.");
+            UserInterface.getInstance().println("Vous vous éclairez avec une torche.");
             ((Darkness)threat).lightUp();
         }
     	super.handleRequest(threat);

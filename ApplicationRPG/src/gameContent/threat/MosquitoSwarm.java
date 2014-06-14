@@ -1,4 +1,5 @@
 package gameContent.threat;
+import ui.UserInterface;
 import game.Player;
 
 
@@ -9,6 +10,6 @@ public class MosquitoSwarm extends PoweredThreat {
     }
 	
 	public void attackMessage() {
-		System.out.println("Vous êtes attaqué par un essaim de moustique !");
+		UserInterface.getInstance().println("Vous êtes attaqué par un essaim de moustique !");
 	}
 }

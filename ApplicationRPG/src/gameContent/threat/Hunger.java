@@ -1,5 +1,6 @@
 package gameContent.threat;
 
+import ui.UserInterface;
 import game.Player;
 
 public class Hunger extends PoweredThreat {
@@ -14,6 +15,6 @@ public class Hunger extends PoweredThreat {
 	}
 
 	public void attackMessage() {
-		System.out.println("Les recherches durent " + getThreatLevel() + " jours. Vous avez faim.");
+		UserInterface.getInstance().println("Les recherches durent " + getThreatLevel() + " jours. Vous avez faim.");
 	}
 }

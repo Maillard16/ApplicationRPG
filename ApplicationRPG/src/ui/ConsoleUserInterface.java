@@ -22,6 +22,12 @@ public class ConsoleUserInterface extends UserInterface {
     }
     
     @Override
+    public void print(String message) {
+        out.print(message);
+        out.flush();
+    }
+    
+    @Override
     public String getLine() {
         String message = "Console Input Error";
         try {
