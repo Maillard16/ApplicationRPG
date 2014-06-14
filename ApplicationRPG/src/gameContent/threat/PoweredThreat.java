@@ -1,12 +1,12 @@
-package gameContent;
+package gameContent.threat;
 
 import game.Player;
 
-public abstract class FallingThreat extends Threat {
+public abstract class PoweredThreat extends Threat {
 	
 	private int threatLevel;
 	
-    public FallingThreat(int threatLevel) {
+    public PoweredThreat(int threatLevel) {
         this.threatLevel = threatLevel;
     }
 
@@ -21,7 +21,10 @@ public abstract class FallingThreat extends Threat {
 		return threatLevel;
 	}
 	
-	public int setThreatLevel(int threatLevel) {
-		return this.threatLevel = threatLevel;
+	public void setThreatLevel(int threatLevel) {
+		this.threatLevel = threatLevel;
+        if(threatLevel <= 0) {
+            setIsThreatning(false);
+        }
 	}
 }

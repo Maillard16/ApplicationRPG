@@ -1,14 +1,12 @@
 package game;
 
-import java.util.Random;
-
+import gameContent.Place;
+import gameContent.handler.Food;
+import gameContent.handler.Handler;
+import gameContent.handler.Shirt;
+import gameContent.handler.Weapon;
 import ui.ConsoleUserInterface;
 import ui.UserInterface;
-import gameContent.Food;
-import gameContent.Handler;
-import gameContent.Knife;
-import gameContent.Place;
-import gameContent.Shirt;
 
 
 public class Game {
@@ -24,11 +22,11 @@ public class Game {
 		UserInterface ui = UserInterface.getInstance();
 		
 		player = new Player(10, 10, Place.shore);
-		System.out.println("Bienvenue dans le jeu. \"help\" affiche les commandes.\n");
-		Place.shore.showInfo();
-		
 		player.addEquipement(new Shirt());
-		player.addEquipement(new Knife());
+		player.addEquipement(new Weapon("couteau", 5));
+		
+		System.out.println("Bienvenue dans le jeu. \"help\" affiche les commandes.\n");
+		Place.shore.welcomPlayer(player);
 		
 		
 		String command;
@@ -38,7 +36,7 @@ public class Game {
 			command = ui.getLine();
 			if(!command.equals("Console Input Error")) {
 				commandChunks = command.split(" ");
-				switch (commandChunks[0]) { //TODO : stunned
+				switch (commandChunks[0]) {
 					case "go" :
 						if(commandChunks.length < 2) {
 							System.out.println("Donner destination.");
@@ -64,6 +62,16 @@ public class Game {
 							equipement = equipement.getSuccessor();
 						}
 						break;
+					case "eat" :
+						Food playerFood = (Food) player.posessEquipement(Food.class);
+						if(playerFood != null) {
+							System.out.println("Vous mangez et gagnez 3 points de vie");
+							player.gainLife(3);
+							playerFood.setDestroyed(true);
+						} else {
+							System.out.println("Vous n'avez pas de nourriture à manger.");
+						}
+						break;
 					case "help" :
 						showHelp();
 						break;
@@ -81,8 +89,9 @@ public class Game {
 		System.out.println("help - afficher l'aide");
 		System.out.println("go x - aller à x");
 		System.out.println("status - afficher votre status");
+		System.out.println("eat");
 		System.out.println("exit - quitter le jeu");
-		System.out.println("Commandes selon l'endroit actuel :");
+		System.out.println("Endroit actuel :");
 		player.getCurrentPlace().showInfo();
 	}
 

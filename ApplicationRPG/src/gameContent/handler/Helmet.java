@@ -1,4 +1,9 @@
-package gameContent;
+package gameContent.handler;
+
+import gameContent.threat.PoweredThreat;
+import gameContent.threat.HeadBlow;
+import gameContent.threat.Rockfall;
+import gameContent.threat.Threat;
 
 public class Helmet extends Handler {
 	
@@ -8,22 +13,17 @@ public class Helmet extends Handler {
 		super(new Class[]{Rockfall.class, HeadBlow.class});
 		this.resistance = resistance;
 	}
-	
-	public Helmet(int resistance, Handler successor) {
-		super(successor, new Class[]{Rockfall.class, HeadBlow.class});
-		this.resistance = resistance;
-	}
 
 	public void handleRequest(Threat threat) {
     	
         if(canHandle(threat)) {
             System.out.println("Le casque vous protège.");
             		
-            int protectionGiven = Math.min(resistance, ((FallingThreat)threat).getThreatLevel());
+            int protectionGiven = Math.min(resistance, ((PoweredThreat)threat).getThreatLevel());
             resistance -= protectionGiven;
-            ((FallingThreat)threat).setThreatLevel(((FallingThreat)threat).getThreatLevel() - protectionGiven);
+            ((PoweredThreat)threat).setThreatLevel(((PoweredThreat)threat).getThreatLevel() - protectionGiven);
             
-            if(((FallingThreat)threat).getThreatLevel() > 0) {
+            if(((PoweredThreat)threat).isThreatening()) {
                 System.out.println("Vous êtes toujours en danger.");
             } else {
                 System.out.println("Le danger est écarté.");

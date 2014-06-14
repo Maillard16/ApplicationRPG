@@ -1,4 +1,4 @@
-package gameContent;
+package gameContent.threat;
 import game.Player;
 
 

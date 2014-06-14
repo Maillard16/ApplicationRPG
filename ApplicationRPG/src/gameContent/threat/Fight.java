@@ -1,5 +1,6 @@
-package gameContent;
+package gameContent.threat;
 
+import game.Ennemi;
 import game.Player;
 
 public class Fight extends Threat {

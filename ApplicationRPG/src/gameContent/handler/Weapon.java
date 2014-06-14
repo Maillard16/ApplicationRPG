@@ -1,29 +1,31 @@
-package gameContent;
+package gameContent.handler;
+
+import gameContent.threat.Fight;
+import gameContent.threat.Threat;
 
 import java.util.Random;
 
-public class Knife extends Handler {
-	
+public class Weapon extends Handler {
 	private static Random randomGenerator = new Random();
+	private int damagePower;
+	private String name;
 
-    public Knife() {
+    public Weapon(String name, int damagePower) {
         super(new Class[]{Fight.class});
-    }
-    
-    public Knife(Handler successor) {
-        super(successor, new Class[]{Fight.class});
+    	this.damagePower = damagePower;
+    	this.name = name;
     }
 
     public void handleRequest(Threat threat) {
     		    	
         if(canHandle(threat)) {
-            System.out.println("Vous attaquez avec un couteau.");
+            System.out.println("Vous attaquez avec un " + name + ".");
             
-            if(((Fight)threat).getEnnemi().getDefensePower() <= 0 || randomGenerator.nextInt(((Fight)threat).getEnnemi().getDefensePower()) < 5/2) {
+            if(((Fight)threat).getEnnemi().getDefensePower() <= 0 || randomGenerator.nextInt(((Fight)threat).getEnnemi().getDefensePower()) < damagePower/2) {
             
-	            ((Fight)threat).setEnnemiLives(((Fight)threat).getEnnemi().getLives() - 5);
+	            ((Fight)threat).setEnnemiLives(((Fight)threat).getEnnemi().getLives() - damagePower);
 	            
-	            if(((Fight)threat).getEnnemi().getLives() > 0) {
+	            if(threat.isThreatening()) {
 	                System.out.println("Le " + ((Fight)threat).getEnnemi().getName() + ", blessé, survit.");
 	            } else {
 	            	System.out.println("Le " + ((Fight)threat).getEnnemi().getName() + " meurt.");

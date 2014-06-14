@@ -1,19 +1,22 @@
-package gameContent;
+package gameContent.handler;
+
+import gameContent.threat.Threat;
 
 public abstract class Handler {
+	//successeur dans la chaine de responsabilité
     private Handler successor;
-    private Class[] handableThreat;
+    private Class[] handableRequest;
+    //si le handler est détruit il est inutil
     private boolean isDestroyed = false;
 
-	public Handler(Class[] handableThreat) {
-        this.handableThreat = handableThreat;
-    }
-	
-	public Handler(Handler successor, Class[] handableThreat) {
-        this.successor = successor;
-        this.handableThreat = handableThreat;
+	public Handler(Class[] handableRequest) {
+        this.handableRequest = handableRequest;
     }
     
+	/**
+	 * Demande au successeur de gérer la menace si besoin est.
+	 * @param threat : menace à gérer
+	 */
     public void handleRequest(Threat threat) {
     	if(threat.isThreatening()) {
 	    	if(successor != null) {
@@ -26,7 +29,7 @@ public abstract class Handler {
     	boolean canHandle = isDestroyed == false;
     	if(canHandle) {
     		canHandle = false;
-    		for (Class handableClass : handableThreat) {
+    		for (Class handableClass : handableRequest) {
 				if(handableClass == threat.getClass()) {
 					canHandle = true;
 					break;

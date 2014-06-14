@@ -1,4 +1,7 @@
-package gameContent;
+package gameContent.handler;
+
+import gameContent.threat.MosquitoSwarm;
+import gameContent.threat.Threat;
 
 public class MosquitoHandler extends Handler {
     
@@ -8,24 +11,19 @@ public class MosquitoHandler extends Handler {
         super(new Class[]{MosquitoSwarm.class});
         this.sprayLoad = sprayLoad;
     }
-    
-    public MosquitoHandler(int sprayLoad, Handler successor) {
-        super(successor, new Class[]{MosquitoSwarm.class});
-        this.sprayLoad = sprayLoad;
-    }
 
     public void handleRequest(Threat threat) {
     		    	
         if(canHandle(threat)) {
             System.out.println("Le spray anti-moustique marche.");
             
-            int killedMosqutoNbr = Math.min(sprayLoad, ((MosquitoSwarm)threat).getMosquitoNbr());
+            int killedMosqutoNbr = Math.min(sprayLoad, ((MosquitoSwarm)threat).getThreatLevel());
             sprayLoad -= killedMosqutoNbr;
-            ((MosquitoSwarm)threat).setMosquitoNbr(((MosquitoSwarm)threat).getMosquitoNbr() - killedMosqutoNbr);
+            ((MosquitoSwarm)threat).setThreatLevel(((MosquitoSwarm)threat).getThreatLevel() - killedMosqutoNbr);
             
             System.out.println("Vous tuez " + killedMosqutoNbr + " moustiques.");
             
-            if(((MosquitoSwarm)threat).getMosquitoNbr() > 0) {
+            if(((MosquitoSwarm)threat).isThreatening()) {
                 System.out.println("Il reste des moustiques.");
             } else {
                 System.out.println("Plus de moustiques.");

@@ -1,6 +1,8 @@
-package gameContent;
+package gameContent.handler;
 
 import game.Player;
+import gameContent.threat.ColdWind;
+import gameContent.threat.Threat;
 
 /**
  * Protection contre le froid
@@ -11,17 +13,13 @@ public class Shirt extends Handler {
         super(new Class[]{ColdWind.class});
     }
     
-    public Shirt(Handler successor) {
-        super(successor, new Class[]{ColdWind.class});
-    }
-    
     public void handleRequest(Threat threat) {
     	
         if(canHandle(threat)) {
             System.out.println("La chemise vous protège du froid.");
-            ((ColdWind)threat).setColdness(((ColdWind)threat).getColdness() - 2);
+            ((ColdWind)threat).setThreatLevel(((ColdWind)threat).getThreatLevel() - 2);
             
-            if(((ColdWind)threat).getColdness() > 0) {
+            if(threat.isThreatening()) {
                 System.out.println("Ce n'est pas suffisant.");
             }
         }

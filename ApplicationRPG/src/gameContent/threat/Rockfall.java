@@ -1,17 +1,11 @@
-package gameContent;
+package gameContent.threat;
 
 import game.Player;
 
-public class Rockfall extends FallingThreat {
+public class Rockfall extends PoweredThreat {
 
 	public Rockfall(int threatLevel) {
 		super(threatLevel);
-	}
-
-	@Override
-	public void dealDamage(Player player) {
-		player.stun();
-		super.dealDamage(player);
 	}
 
 	@Override

@@ -1,16 +1,11 @@
-package gameContent;
+package gameContent.threat;
 
 import game.Player;
 
-public class HeadBlow extends FallingThreat {
+public class HeadBlow extends PoweredThreat {
 
 	public HeadBlow(int threatLevel) {
 		super(threatLevel);
-	}
-
-	@Override
-	public void dealDamage(Player player) {
-		super.dealDamage(player);
 	}
 
 	@Override

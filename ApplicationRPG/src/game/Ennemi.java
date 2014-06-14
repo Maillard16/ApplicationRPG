@@ -1,4 +1,4 @@
-package gameContent;
+package game;
 
 public class Ennemi {
 	private String name;
