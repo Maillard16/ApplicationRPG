@@ -77,13 +77,14 @@ public abstract class Place {
 			visited = true;
 		}
 		UserInterface.getInstance().println(name + " : " + visitText);
+		UserInterface.getInstance().println("--------------------------------------------------------------");
 		UserInterface.getInstance().println("Destinations possibles : ");
 		for (Place place : connectedPlaces) {
-			UserInterface.getInstance().println(place.name);
+			UserInterface.getInstance().println("\t" + place.name);
 		}
 		UserInterface.getInstance().println("Actions possibles : ");
 		for (String action : possibleActions) {
-			UserInterface.getInstance().println(action);
+			UserInterface.getInstance().println("\t" + action);
 		}
 		UserInterface.getInstance().println("");
 	}
@@ -103,12 +104,12 @@ public abstract class Place {
 	}
 	
 	public void handleCommand(String command) {
-		UserInterface.getInstance().println("commande inconnue");
+		UserInterface.getInstance().println("Commande inconnue. Utiliser help pour afficher les commandes.");
 	}
 		
 	/**
 	 * Méthode utilisée lors de l'entrée dans l'endroit
-	 * @param player
+	 * @param player : joueur à accueillir
 	 */
 	public void welcomPlayer(Player player) {
 		this.player = player;
@@ -139,7 +140,7 @@ public abstract class Place {
 						}
 					}
 				}
-				UserInterface.getInstance().println("commande inconnue");
+				super.handleCommand(command);
 			}
 		},
 		foulitTavern = new Place("taverne", "Vous entrez dans la taverne du poney qui tousse. L’odeur de la bière, de la sueur et du renfermé vous assaille. Il vous semble qu’il n’y ait que les clients habituels, puis vous remarquer un homme au teint halé, portant un capuchon pointu, assis seul dans un coin.", "") {
@@ -164,7 +165,7 @@ public abstract class Place {
 						}
 					}
 				}
-				UserInterface.getInstance().println("commande inconnue");				
+				super.handleCommand(command);				
 			}
 		},
 		foulitMarket = new Place("marché", "Vous êtes au marché de Foulit.\nVentes possibles : nourriture (prix : 5)\nAchats possibles : anti-moustique (prix : 15), épée (prix : 25)", "") {
@@ -227,7 +228,7 @@ public abstract class Place {
 						}
 					}
 				}
-				UserInterface.getInstance().println("commande inconnue");
+				super.handleCommand(command);
 			}
 		},
 		foulitVillage = new Place("village", "Vous êtes sur la place du village", "Le village de Foulit est modeste et son économie agraire. Cependant, étant au carrefour de la route longeant la côte et de celle plongeant au cœur de la région d’Engall, il a au fil des ans attiré marchands et artisans et finis par mériter de figurer sur une carte.") {
@@ -256,7 +257,7 @@ public abstract class Place {
 						}
 					}
 				}
-				UserInterface.getInstance().println("commande inconnue");
+				super.handleCommand(command);
 			}
 		},
 		foulitFarm = new Place("ferme", "Vous arrivez à la ferme du vieux Gérard", "") {
@@ -304,7 +305,7 @@ public abstract class Place {
 						}
 					}
 				}
-				UserInterface.getInstance().println("commande inconnue");			
+				super.handleCommand(command);			
 			}
 		},
 		grimbaughSwamp = new Place("marais", "Vous progressez difficilement en pataugeant.", "Les marais de Grimbaugh s'étendent à perte de vue.\nL'odeur de souffre est insuportable et vos pieds s'enfoncent dans la vase.") {
@@ -321,7 +322,7 @@ public abstract class Place {
 						}
 					}
 				}
-				UserInterface.getInstance().println("commande inconnue");
+				super.handleCommand(command);
 			}
 			public void welcomPlayer(Player target) {
 				super.welcomPlayer(target);
@@ -357,7 +358,7 @@ public abstract class Place {
 						}
 					}
 				}
-				UserInterface.getInstance().println("commande inconnue");
+				super.handleCommand(command);
 			}
 			public void welcomPlayer(Player target) {
 				super.welcomPlayer(target);
@@ -389,7 +390,7 @@ public abstract class Place {
 						}
 					}
 				}
-				UserInterface.getInstance().println("commande inconnue");
+				super.handleCommand(command);
 			}
 		};
 		//lindisfarneMonastry = new Place("monastere", "", "") {
